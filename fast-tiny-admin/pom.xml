@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.me.fast.tiny.admin</groupId>
+    <artifactId>fast-tiny-admin</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>fast-tiny-admin</name>
+    <description>fast-tiny-admin project for Spring Boot</description>
+
+    <parent>
+        <groupId>com.me.fast.tiny</groupId>
+        <artifactId>fast-tiny</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.me.fast.tiny.common</groupId>
+            <artifactId>fast-tiny-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

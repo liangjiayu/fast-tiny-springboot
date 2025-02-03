@@ -1,0 +1,26 @@
+server:
+  port: 7100
+
+spring:
+  application:
+    name: fast-tiny-admin
+  profiles:
+    active: dev
+
+# mybatis-plus配置详情： https://baomidou.com/reference/
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: ASSIGN_ID
+  configuration:
+    auto-mapping-behavior: partial
+    map-underscore-to-camel-case: true
+
+# springdoc文档：https://springdoc.org/#properties
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+  api-docs:
+    path: /api-docs
