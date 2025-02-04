@@ -2,13 +2,11 @@
 
 ## 简介
 
-⚡️基于springboot的快速开发的框架，可用于现代web服务接口开发，开箱即用。
-
-
+⚡️ 基于 springboot 的快速开发的框架，可用于现代 web 服务接口开发，开箱即用。
 
 ## 项目展示
 
-**常规的单表CRUD**
+**常规的单表 CRUD**
 
 ![](./doc/image01.png)
 
@@ -16,26 +14,23 @@
 
 ![](./doc/image02.png)
 
-
-
 ## 技术选型
 
-| 技术                | 版本       | 说明                      |
-|:------------------|----------|-------------------------|
-| spring-boot       | 3.4.2    | MVC框架，功能包括web服务、检验、切面等等 |
-| springdoc-openapi | 2.8.4    | swagger文档生成工具           |
-| mysql-connector-j | 9.2.0    | mysql数据库驱动              |
-| mybatis-plus      | 3.5.10.1 | ORM框架，MyBatis 增强工具      |
-| hutool            | 5.8.35   | Java工具类库                |
-| lombok            | 1.18.36  | 简化代码工具                  |
-
+| 技术              | 版本     | 说明                                        |
+| :---------------- | -------- | ------------------------------------------- |
+| spring-boot       | 3.4.2    | MVC 框架，功能包括 web 服务、检验、切面等等 |
+| springdoc-openapi | 2.8.4    | swagger 文档生成工具                        |
+| mysql-connector-j | 9.2.0    | mysql 数据库驱动                            |
+| mybatis-plus      | 3.5.10.1 | ORM 框架，MyBatis 增强工具                  |
+| hutool            | 5.8.35   | Java 工具类库                               |
+| lombok            | 1.18.36  | 简化代码工具                                |
 
 ## 使用流程
 
 ### 环境搭建
 
-- 数据库默认版本为8.0，支持5.7的版本，数据库需要导入 [初始化脚本](./sql/sys_users.sql)。
-- JDK版本需要17以上，项目默认为21，可在`pom`文件中修改。
+- 数据库默认版本为 8.0，支持 5.7 的版本，数据库需要导入 [初始化脚本](./sql/sys_users.sql)。
+- JDK 版本需要 17 以上，项目默认为 21，可在`pom`文件中修改。
 
 ### 项目运行
 
@@ -47,9 +42,7 @@
 
 ### 项目部署
 
-通过Docker插件一键部署 todo
-
-
+通过 Docker 插件一键部署 todo
 
 ## 项目结构
 
@@ -106,13 +99,8 @@
 └── pom.xml  # Maven 公共项目配置文件，只定义通用依赖
 ```
 
-
-
 ## 其他说明
 
 - 通过`CommonResult`返回统一的结构体，其中`CommonResult.success`为成功，`CommonResult.failed`为失败。
 - 业务异常可通过 `throw new ApiException("xxx")`，全局异常会自动捕获，返回统一错误。
 - 枚举的检验，可使用`ValidEnum`注解，如` @ValidEnum(enumClass = GenderEnum.class, message = "性别编码不合法")`。
-
-
-
