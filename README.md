@@ -16,20 +16,21 @@
 
 ## 技术选型
 
-| 技术              | 版本     | 说明                                        |
-| :---------------- | -------- | ------------------------------------------- |
-| spring-boot       | 3.4.2    | MVC 框架，功能包括 web 服务、检验、切面等等 |
-| springdoc-openapi | 2.8.4    | swagger 文档生成工具                        |
-| mysql-connector-j | 9.2.0    | mysql 数据库驱动                            |
-| mybatis-plus      | 3.5.10.1 | ORM 框架，MyBatis 增强工具                  |
-| hutool            | 5.8.35   | Java 工具类库                               |
-| lombok            | 1.18.36  | 简化代码工具                                |
+| 技术                   | 版本     | 说明                                        |
+| :--------------------- | -------- | ------------------------------------------- |
+| spring-boot            | 3.4.2    | MVC 框架，功能包括 web 服务、检验、切面等等 |
+| springdoc-openapi      | 2.8.4    | swagger 文档生成工具                        |
+| mysql-connector-j      | 9.2.0    | mysql 数据库驱动                            |
+| mybatis-plus           | 3.5.10.1 | ORM 框架，MyBatis 增强工具                  |
+| mybatis-plus generator | 3.5.10.1 | 代码生成器                                  |
+| hutool                 | 5.8.35   | Java 工具类库                               |
+| lombok                 | 1.18.36  | 简化代码工具                                |
 
 ## 使用流程
 
 ### 环境搭建
 
-- 数据库默认版本为 8.0，支持 5.7 的版本，数据库需要导入 [初始化脚本](./sql/sys_users.sql)。
+- 数据库默认版本为 8.0，支持 5.7 的版本，数据库初始化运行 [sql 脚本](./sql/sys_users.sql)，可快速运行项目。
 - JDK 版本需要 17 以上，项目默认为 21，可在`pom`文件中修改。
 
 ### 项目运行
@@ -38,7 +39,12 @@
 
 ### 业务代码开发
 
-通过脚本一件生成代码文件 todo
+通过`CodeGenerator`一键生成业务代码文件，文件包括 controller、mapper、model、service、xml，并且有可直接运行的 CURD 代码。
+
+1. 设计表字段，并且一定要写好字段的注释，生成器会自动生成在线文档字段说明。
+2. 运行代码生成器在 `common`模块中，输入表的名称，如图 <img src="./doc/image03.png" style="zoom:50%;" />
+3. 生成的文件在`generatorFile`目录中，手动把生成的文件拖动到业务模块中，文件目录如图 <img src="./doc/image04.png" style="zoom:50%;" />
+4. 生成的代码可直接运行，有基础的 curd，生成的在线文档如图 ![](./doc/image05.png)
 
 ### 项目部署
 
@@ -90,8 +96,10 @@
 │       │       ├── dto  # 数据传输对象基类
 │       │       │   └── BasePages.java     # 分页查询参数基类（包含 pageNum/pageSize）
 │       │       ├── exception  # 全局异常处理
-│       │       │   ├── ApiException.java         # 自定义业务异常类
+│       │       │   ├── ApiException.java            # 自定义业务异常类
 │       │       │   └── GlobalExceptionHandler.java  # 全局异常处理器（统一返回错误格式）
+│       │       ├── generator
+│       │       │   └── CodeGenerator.java # 代码生成器
 │       │       └── validator  # 自定义校验器
 │       │           ├── EnumValidator.java  # 枚举校验器实现
 │       │           └── ValidEnum.java      # 枚举校验注解
