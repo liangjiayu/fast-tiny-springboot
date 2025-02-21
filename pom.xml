@@ -24,7 +24,7 @@
     </modules>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>17</java.version>
         <fast-tiny-common.version>0.0.1-SNAPSHOT</fast-tiny-common.version>
         <hutool.version>5.8.35</hutool.version>
         <mysql-connector-j.version>9.2.0</mysql-connector-j.version>
@@ -73,14 +73,5 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
