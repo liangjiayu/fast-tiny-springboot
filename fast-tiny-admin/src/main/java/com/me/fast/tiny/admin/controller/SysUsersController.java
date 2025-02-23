@@ -27,7 +27,7 @@ public class SysUsersController {
 
     @GetMapping("/list")
     @ResponseBody
-    @Operation(summary = "获取用户列表!!!")
+    @Operation(summary = "获取用户列表123!!!")
     public CommonResult<IPage<SysUsers>> list(@Validated @ParameterObject SysUsersQuery sysUsersQuery) {
         IPage<SysUsers> records = this.sysUsersService.list(sysUsersQuery);
         return CommonResult.success(records);
