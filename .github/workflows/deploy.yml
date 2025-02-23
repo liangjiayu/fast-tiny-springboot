@@ -52,7 +52,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /www/docker_compose
+            cd /www/fast-tiny-app
 
             docker-compose down || true
             docker-compose pull
