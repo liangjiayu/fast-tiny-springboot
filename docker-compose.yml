@@ -1,7 +1,7 @@
 services:
   app:
-    image: liangjiayu/fast-tiny-app:latest
-    container_name: fast-tiny-app
+    image: ${IMAGE_FULL_NAME}
+    container_name: ${IMAGE_NAME}
     restart: unless-stopped
     ports:
       - "7100:7100"

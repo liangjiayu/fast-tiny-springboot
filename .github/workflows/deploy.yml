@@ -53,6 +53,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /www/fast-tiny-app
+            export IMAGE_FULL_NAME=$IMAGE_FULL_NAME
+            export IMAGE_NAME=$IMAGE_NAME
 
             docker-compose down || true
             docker-compose pull
