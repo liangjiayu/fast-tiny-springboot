@@ -52,13 +52,8 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker stop ${{ env.IMAGE_NAME }} 2>/dev/null
-            docker rm ${{ env.IMAGE_NAME }} 2>/dev/null
-            docker rmi ${{ env.IMAGE_FULL_NAME }} || true
+            cd /www/docker_compose
 
-            docker pull ${{ env.IMAGE_FULL_NAME }}
-            docker run -d \
-              --name ${{ env.IMAGE_NAME }} \
-              --restart unless-stopped \
-              -p 7100:7100 \
-              ${{ env.IMAGE_FULL_NAME }}
+            docker-compose down || true
+            docker-compose pull
+            docker-compose up -d
