@@ -1,13 +1,13 @@
-name: Deploy to Server
+name: Deploy to Daily
 on:
   push:
-    branches: [main]
+    branches: [main, develop]
   workflow_dispatch:
 
 env:
   REGISTRY: docker.io
   IMAGE_NAME: fast-tiny-app
-  IMAGE_FULL_NAME: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/fast-tiny-app:latest
+  IMAGE_FULL_NAME: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/fast-tiny-app:daily
 
 jobs:
   build:
