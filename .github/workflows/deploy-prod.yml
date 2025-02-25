@@ -2,9 +2,6 @@ name: Deploy to Prod
 
 on:
   workflow_dispatch:
-  workflow_run:
-    branches:
-      - "main"
 
 env:
   REGISTRY: docker.io
