@@ -1,7 +1,5 @@
 name: Deploy to Daily
 on:
-  push:
-    branches: [main, develop]
   workflow_dispatch:
 
 env:
