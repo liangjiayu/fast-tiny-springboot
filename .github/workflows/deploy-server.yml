@@ -15,6 +15,7 @@ on:
 env:
   REGISTRY: docker.io
   IMAGE_NAME: fast-tiny-app
+  TZ: Asia/Shanghai
 
 jobs:
   build:
@@ -22,7 +23,7 @@ jobs:
     env:
       IMAGE_TAG: ""
     outputs:
-      image_tag: ${{ steps.set-tag.outputs.IMAGE_TAG }}
+      IMAGE_TAG: ${{ steps.set-tag.outputs.IMAGE_TAG }}
 
     steps:
       - name: Checkout code
@@ -31,7 +32,7 @@ jobs:
       - name: Generate timestamp
         id: set-tag
         run: |
-          TAG=$(date +%Y%m%d%H%M%S)
+          TAG=$(date +%Y%m%d%H%M)
           echo "IMAGE_TAG=$TAG" >> $GITHUB_OUTPUT
           echo "IMAGE_TAG=$TAG" >> $GITHUB_ENV
 
