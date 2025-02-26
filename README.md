@@ -26,30 +26,6 @@
 | hutool                 | 5.8.35   | Java 工具类库                               |
 | lombok                 | 1.18.36  | 简化代码工具                                |
 
-## 使用流程
-
-### 环境搭建
-
-- 数据库默认版本为 8.0，支持 5.7 的版本，数据库初始化运行 [sql 脚本](./sql/sys_users.sql)，可快速运行项目。
-- JDK 版本需要 17 以上，项目默认为 17，可在`pom`文件中修改。
-
-### 项目运行
-
-直接通过`idea`运行业务模块的`AdminApplication`启动类即可。
-
-### 业务代码开发
-
-通过`CodeGenerator`一键生成业务代码文件，文件包括 controller、mapper、model、service、xml，并且有可直接运行的 CURD 代码。
-
-1. 设计表字段，并且一定要写好字段的注释，生成器会自动生成在线文档字段说明。
-2. 运行代码生成器在 `common`模块中，输入表的名称，如图 ![](./doc/image03.png)
-3. 生成的文件在`generatorFile`目录中，手动把生成的文件拖动到业务模块中，文件目录如图 ![](./doc/image04.png)
-4. 生成的代码可直接运行，有基础的 curd，生成的在线文档如图 ![](./doc/image05.png)
-
-### 项目部署
-
-通过 Docker 插件一键部署 todo
-
 ## 项目结构
 
 #### 业务模块结构
@@ -107,11 +83,25 @@
 └── pom.xml  # Maven 公共项目配置文件，只定义通用依赖
 ```
 
-## 其他说明
+## 使用流程
 
-- 通过`CommonResult`返回统一的结构体，其中`CommonResult.success`为成功，`CommonResult.failed`为失败。
-- 业务异常可通过 `throw new ApiException("xxx")`，全局异常会自动捕获，返回统一错误。
-- 枚举的检验，可使用`ValidEnum`注解，如` @ValidEnum(enumClass = GenderEnum.class, message = "性别编码不合法")`。
+### 环境搭建
+
+- 数据库默认版本为 8.0，支持 5.7 的版本，数据库初始化运行 [sql 脚本](./sql/sys_users.sql)，可快速运行项目。
+- JDK 版本需要 17 以上，项目默认为 17，可在`pom`文件中修改。
+
+### 项目运行
+
+直接通过`idea`运行业务模块的`AdminApplication`启动类即可。
+
+### 业务代码开发
+
+通过`CodeGenerator`一键生成业务代码文件，文件包括 controller、mapper、model、service、xml，并且有可直接运行的 CURD 代码。
+
+1. 设计表字段，并且一定要写好字段的注释，生成器会自动生成在线文档字段说明。
+2. 运行代码生成器在 `common`模块中，输入表的名称，如图 ![](./doc/image03.png)
+3. 生成的文件在`generatorFile`目录中，手动把生成的文件拖动到业务模块中，文件目录如图 ![](./doc/image04.png)
+4. 生成的代码可直接运行，有基础的 curd，生成的在线文档如图 ![](./doc/image05.png)
 
 ## 一键部署
 
@@ -184,7 +174,20 @@ open http://<服务器IP>:7100
 
 ```bash
 cd /www/fast-tiny-app
-docker-compose down
-docker pull docker.io/<用户名>/fast-tiny-app:<旧标签>
+
+# 设置环境变量
+IMAGE_FULL_NAME="docker.io/xxxx/fast-tiny-app:<标签日期>"
+echo "IMAGE_FULL_NAME=$IMAGE_FULL_NAME" > .env
+echo "IMAGE_NAME=fast-tiny-app" >> .env
+
+# 重新部署镜像
+docker-compose down || true
+docker-compose pull
 docker-compose up -d
 ```
+
+## 其他说明
+
+- 通过`CommonResult`返回统一的结构体，其中`CommonResult.success`为成功，`CommonResult.failed`为失败。
+- 业务异常可通过 `throw new ApiException("xxx")`，全局异常会自动捕获，返回统一错误。
+- 枚举的检验，可使用`ValidEnum`注解，如` @ValidEnum(enumClass = GenderEnum.class, message = "性别编码不合法")`。
