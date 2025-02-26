@@ -2,7 +2,7 @@
 
 ## 简介
 
-⚡️ 基于 springboot 的快速开发的框架，可用于现代 web 服务接口开发，开箱即用。
+⚡️ 基于 springboot 的快速开发的框架，可用于现代 web 服务接口开发，开箱即用，一键部署。
 
 ## 项目展示
 
@@ -31,7 +31,7 @@
 ### 环境搭建
 
 - 数据库默认版本为 8.0，支持 5.7 的版本，数据库初始化运行 [sql 脚本](./sql/sys_users.sql)，可快速运行项目。
-- JDK 版本需要 17 以上，项目默认为 21，可在`pom`文件中修改。
+- JDK 版本需要 17 以上，项目默认为 17，可在`pom`文件中修改。
 
 ### 项目运行
 
@@ -42,8 +42,8 @@
 通过`CodeGenerator`一键生成业务代码文件，文件包括 controller、mapper、model、service、xml，并且有可直接运行的 CURD 代码。
 
 1. 设计表字段，并且一定要写好字段的注释，生成器会自动生成在线文档字段说明。
-2. 运行代码生成器在 `common`模块中，输入表的名称，如图 <img src="./doc/image03.png" style="zoom:50%;" />
-3. 生成的文件在`generatorFile`目录中，手动把生成的文件拖动到业务模块中，文件目录如图 <img src="./doc/image04.png" style="zoom:50%;" />
+2. 运行代码生成器在 `common`模块中，输入表的名称，如图 ![](./doc/image03.png)
+3. 生成的文件在`generatorFile`目录中，手动把生成的文件拖动到业务模块中，文件目录如图 ![](./doc/image04.png)
 4. 生成的代码可直接运行，有基础的 curd，生成的在线文档如图 ![](./doc/image05.png)
 
 ### 项目部署
@@ -112,3 +112,79 @@
 - 通过`CommonResult`返回统一的结构体，其中`CommonResult.success`为成功，`CommonResult.failed`为失败。
 - 业务异常可通过 `throw new ApiException("xxx")`，全局异常会自动捕获，返回统一错误。
 - 枚举的检验，可使用`ValidEnum`注解，如` @ValidEnum(enumClass = GenderEnum.class, message = "性别编码不合法")`。
+
+## 一键部署
+
+### 准备工作
+
+#### 服务器环境
+
+- 确保服务器已安装 Docker 和 Docker Compose。
+- 在服务器上创建项目目录（例如 `/www/fast-tiny-app`），并上传 `docker-compose.yml`和`.env` 文件，具体可参考项目 [服务端配置](./service-config/)
+
+#### ​GitHub Secrets 配置
+
+在仓库的 `Settings -> Secrets -> Actions` 中添加以下密钥：
+
+| Secret 名称        | 作用说明                                            |
+| :----------------- | --------------------------------------------------- |
+| SERVER_HOST        | 部署服务器的公网 IP                                 |
+| SSH_USERNAME       | 登录服务器的 SSH 用户名，默认为 root                |
+| SSH_PRIVATE_KEY    | 用于 SSH 登录服务器的私钥内容（需与服务器公钥配对） |
+| DOCKERHUB_USERNAME | Docker Hub 账号用户名                               |
+| DOCKERHUB_TOKEN    | Docker Hub 的访问令牌                               |
+
+#### docker-compose.yml 和.env 示例
+
+```yml
+services:
+  app:
+    image: ${IMAGE_FULL_NAME}
+    container_name: ${IMAGE_NAME}
+    restart: unless-stopped
+    ports:
+      - "7100:7100"
+```
+
+```bash
+IMAGE_FULL_NAME=domain/my-image:latest
+IMAGE_NAME=my-image
+```
+
+### 部署步骤
+
+#### 通过 GitHub Actions 手动触发
+
+1. 进入 GitHub 仓库的 ​Actions​ 标签页。
+2. 选择 **​Deploy to Server**​ 工作流程，点击 **​Run workflow**。
+3. 选择部署环境：
+   - daily: 日常环境（默认）。
+   - prod: 生产环境。
+4. 点击 **​Run workflow**​ 开始部署。
+5. 等待构建和部署完成，观察日志是否有错误。
+
+### 验证部署
+
+```bash
+# ​检查容器状态​
+docker ps -f name=fast-tiny-app
+# 查看应用日志
+docker logs fast-tiny-app
+# 访问应用 URL
+open http://<服务器IP>:7100
+```
+
+### 注意事项
+
+1. 错误排查
+   - 若部署失败，检查 GitHub Actions 日志中的错误信息。
+   - 确保服务器的 SSH 密钥权限正确
+2. 回滚操作
+   若需回滚，可手动在服务器执行：
+
+```bash
+cd /www/fast-tiny-app
+docker-compose down
+docker pull docker.io/<用户名>/fast-tiny-app:<旧标签>
+docker-compose up -d
+```
