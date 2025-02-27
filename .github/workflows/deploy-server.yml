@@ -72,7 +72,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           envs: IMAGE_NAME
           script: |
-            cd /www/fast-tiny-app
+            cd /home/admin/fast-tiny-app
 
             IMAGE_FULL_NAME="${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.build.outputs.IMAGE_TAG }}"
 
