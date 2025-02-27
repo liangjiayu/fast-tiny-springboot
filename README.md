@@ -2,7 +2,7 @@
 
 ## 简介
 
-⚡️ 基于 springboot 的快速开发的框架，可用于现代 web 服务接口开发，开箱即用，一键部署。
+基于 springboot 的快速开发的框架，可用于现代 web 服务接口开发，开箱即用，一键部署 🚀
 
 ## 项目展示
 
@@ -98,8 +98,10 @@
 
 通过`CodeGenerator`一键生成业务代码文件，文件包括 controller、mapper、model、service、xml，并且有可直接运行的 CURD 代码。
 
+代码生成器在 `common -> generator -> CodeGenerator` 模块中，通过 `idea`运行脚本。
+
 1. 设计表字段，并且一定要写好字段的注释，生成器会自动生成在线文档字段说明。
-2. 运行代码生成器在 `common`模块中，输入表的名称，如图 ![](./doc/image03.png)
+2. 运行代码生成器，输入表的名称，如图 ![](./doc/image03.png)
 3. 生成的文件在`generatorFile`目录中，手动把生成的文件拖动到业务模块中，文件目录如图 ![](./doc/image04.png)
 4. 生成的代码可直接运行，有基础的 curd，生成的在线文档如图 ![](./doc/image05.png)
 
@@ -110,7 +112,7 @@
 #### 服务器环境
 
 - 确保服务器已安装 Docker 和 Docker Compose。
-- 在服务器上创建项目目录（例如 `/www/fast-tiny-app`），并上传 `docker-compose.yml`和`.env` 文件，具体可参考项目 [服务端配置](./service-config/)
+- 在服务器上创建项目目录（例如 `/home/admin/fast-tiny-app`），并上传 `docker-compose.yml`和`.env` 文件，具体可参考项目 [服务端配置](./service-config/)
 
 #### ​GitHub Secrets 配置
 
@@ -173,7 +175,7 @@ open http://<服务器IP>:7100
    若需回滚，可手动在服务器执行：
 
 ```bash
-cd /www/fast-tiny-app
+cd /home/admin/fast-tiny-app
 
 # 设置环境变量
 IMAGE_FULL_NAME="docker.io/xxxx/fast-tiny-app:<标签日期>"
