@@ -73,12 +73,7 @@ jobs:
           envs: IMAGE_NAME
           script: |
             cd /home/admin/fast-tiny-app
-
-#            IMAGE_FULL_NAME="${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.build.outputs.IMAGE_TAG }}"
-#
-#            echo "IMAGE_FULL_NAME=$IMAGE_FULL_NAME" > .env
-#            echo "IMAGE_NAME=$IMAGE_NAME" >> .env
-
+            
             docker-compose down || true
             docker-compose pull
             docker-compose up -d
