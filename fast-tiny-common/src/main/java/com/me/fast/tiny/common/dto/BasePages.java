@@ -11,7 +11,7 @@ public class BasePages {
 
     @Parameter(description = "页码，从1开始", example = "1")
     @NotNull(message = "页码不能为空")
-    @Min(value = 1, message = "页面必须大于1")
+    @Min(value = 1, message = "页码必须大于1")
     private Integer pageNum = 1;
 
     @Parameter(description = "分页大小", example = "10")
