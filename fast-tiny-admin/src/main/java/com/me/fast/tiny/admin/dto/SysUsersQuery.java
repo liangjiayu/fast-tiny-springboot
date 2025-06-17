@@ -27,7 +27,8 @@ public class SysUsersQuery extends BasePages {
     @Schema(description = "开始时间，格式为yyyy-MM-dd HH:mm:ss", example = "2025-01-01 10:00:00")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime startTime;
+
     @Schema(description = "结束时间，格式为yyyy-MM-dd HH:mm:ss", example = "2030-02-01 18:00:00")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime endTime;    // 新增字段
+    private LocalDateTime endTime;
 }
