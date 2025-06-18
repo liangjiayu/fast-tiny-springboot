@@ -107,6 +107,22 @@
 
 ## 一键部署
 
+**部署流传图**
+
+```mermaid
+flowchart TD
+    A[触发工作流] --> B[构建阶段]
+    B --> C[Checkout代码]
+    C --> D[生成时间戳标签]
+    D --> E[打包jar]
+    E --> F[登录并推送镜像]
+    F --> G[部署阶段]
+    G --> H[SSH连接服务器]
+    H --> I[生成覆盖配置]
+    I --> J[停止旧容器]
+    J --> K[启动新容器]
+```
+
 ### 准备工作
 
 #### 服务器环境
@@ -126,34 +142,14 @@
 | DOCKERHUB_USERNAME | Docker Hub 账号用户名                               |
 | DOCKERHUB_TOKEN    | Docker Hub 的访问令牌                               |
 
-#### docker-compose.yml 和.env 示例
-
-```yml
-services:
-  app:
-    image: ${IMAGE_FULL_NAME}
-    container_name: ${IMAGE_NAME}
-    restart: unless-stopped
-    ports:
-      - "7100:7100"
-```
-
-```bash
-IMAGE_FULL_NAME=domain/my-image:latest
-IMAGE_NAME=my-image
-```
-
 ### 部署步骤
 
 #### 通过 GitHub Actions 手动触发
 
 1. 进入 GitHub 仓库的 ​Actions​ 标签页。
 2. 选择 **​Deploy to Server**​ 工作流程，点击 **​Run workflow**。
-3. 选择部署环境：
-   - daily: 日常环境（默认）。
-   - prod: 生产环境。
-4. 点击 **​Run workflow**​ 开始部署。
-5. 等待构建和部署完成，观察日志是否有错误。
+3. 点击 **​Run workflow**​ 开始部署。
+4. 等待构建和部署完成，观察日志是否有错误。
 
 ### 验证部署
 
@@ -178,14 +174,13 @@ open http://<服务器IP>:7100
 cd /home/admin/fast-tiny-app
 
 # 设置环境变量
-IMAGE_FULL_NAME="docker.io/xxxx/fast-tiny-app:<标签日期>"
-echo "IMAGE_FULL_NAME=$IMAGE_FULL_NAME" > .env
-echo "IMAGE_NAME=fast-tiny-app" >> .env
+echo "IMAGE_TAG=<标签日期>" > .env.override
+echo "IMAGE_NAME=docker.io/xxxx/fast-tiny-app" >> .env.override
 
 # 重新部署镜像
 docker-compose down || true
-docker-compose pull
-docker-compose up -d
+docker-compose --env-file .env --env-file .env.override pull
+docker-compose --env-file .env --env-file .env.override up -d
 ```
 
 ## 其他说明
