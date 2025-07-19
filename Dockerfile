@@ -1,5 +1,5 @@
 # 基础镜像
-FROM eclipse-temurin:17
+FROM eclipse-temurin:21
 # 设置工作目录
 WORKDIR /app
 # 复制构建的JAR文件到容器中
