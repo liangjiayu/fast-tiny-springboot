@@ -35,7 +35,7 @@ public class SysArticlesController {
     @ResponseBody
     @Operation(summary = "获取文章列表")
     public CommonResult<IPage<SysArticles>> getArticleByPage(@ParameterObject ArticleQuery articleQuery) {
-        IPage<SysArticles> records = this.baseService.getPage(articleQuery);
+        IPage<SysArticles> records = this.baseService.getListByPage(articleQuery);
         return CommonResult.success(records);
     }
 
@@ -44,7 +44,7 @@ public class SysArticlesController {
     @ResponseBody
     @Operation(summary = "创建文章数据")
     public CommonResult<Integer> createArticle(@RequestBody ArticleSaveRequest articleSaveRequest) {
-        Integer result = this.baseService.create(articleSaveRequest);
+        Integer result = this.baseService.createArticle(articleSaveRequest);
         return CommonResult.success(result);
     }
 
@@ -52,7 +52,7 @@ public class SysArticlesController {
     @ResponseBody
     @Operation(summary = "更新文章数据")
     public CommonResult<Boolean> updateArticle(@RequestBody ArticleSaveRequest articleSaveRequest) {
-        Boolean result = this.baseService.update(articleSaveRequest);
+        Boolean result = this.baseService.updateArticle(articleSaveRequest);
         if (result) {
             return CommonResult.success(true);
         }
@@ -62,8 +62,8 @@ public class SysArticlesController {
     @PostMapping("/deleted")
     @ResponseBody
     @Operation(summary = "删除文章数据")
-    public CommonResult<Boolean> deletedArticle(@Parameter() Integer id) {
-        Boolean result = this.baseService.deleted(id);
+    public CommonResult<Boolean> deleteArticle(@Parameter() Integer id) {
+        Boolean result = this.baseService.deleteArticle(id);
         if (result) {
             return CommonResult.success(true);
         }

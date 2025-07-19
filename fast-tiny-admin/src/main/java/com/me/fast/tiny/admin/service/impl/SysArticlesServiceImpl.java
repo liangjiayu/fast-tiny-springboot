@@ -30,8 +30,8 @@ public class SysArticlesServiceImpl extends ServiceImpl<SysArticlesMapper, SysAr
     SysArticlesMapper baseMapper;
 
     @Override
-    public IPage<SysArticles> getPage(ArticleQuery articleQuery) {
-        Page<SysArticles> page = new Page<>(articleQuery.getPageNum(), articleQuery.getPageSize());
+    public IPage<SysArticles> getListByPage(ArticleQuery articleQuery) {
+        Page<SysArticles> page = new Page<>(articleQuery.getCurrent(), articleQuery.getPageSize());
         LambdaQueryWrapper<SysArticles> lambdaQueryWrapper = new LambdaQueryWrapper<>();
 
         // 查询文章标题
@@ -43,7 +43,7 @@ public class SysArticlesServiceImpl extends ServiceImpl<SysArticlesMapper, SysAr
     }
 
     @Override
-    public Integer create(ArticleSaveRequest articleSaveRequest) {
+    public Integer createArticle(ArticleSaveRequest articleSaveRequest) {
         SysArticles record = new SysArticles();
         BeanUtils.copyProperties(articleSaveRequest, record);
         record.setId(null);
@@ -53,7 +53,7 @@ public class SysArticlesServiceImpl extends ServiceImpl<SysArticlesMapper, SysAr
     }
 
     @Override
-    public Boolean update(ArticleSaveRequest articleSaveRequest) {
+    public Boolean updateArticle(ArticleSaveRequest articleSaveRequest) {
         SysArticles record = new SysArticles();
         BeanUtils.copyProperties(articleSaveRequest, record);
 
@@ -61,7 +61,7 @@ public class SysArticlesServiceImpl extends ServiceImpl<SysArticlesMapper, SysAr
     }
 
     @Override
-    public Boolean deleted(Integer id) {
+    public Boolean deleteArticle(Integer id) {
         return this.baseMapper.deleteById(id) > 0;
     }
 

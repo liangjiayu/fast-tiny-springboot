@@ -15,11 +15,11 @@ import com.me.fast.tiny.admin.model.SysArticles;
  * @since 2025-06-17
  */
 public interface ISysArticlesService extends IService<SysArticles> {
-    IPage<SysArticles> getPage(ArticleQuery articleQuery);
+    IPage<SysArticles> getListByPage(ArticleQuery articleQuery);
 
-    Integer create(ArticleSaveRequest articleSaveRequest);
+    Integer createArticle(ArticleSaveRequest articleSaveRequest);
 
-    Boolean update(ArticleSaveRequest articleSaveRequest);
+    Boolean updateArticle(ArticleSaveRequest articleSaveRequest);
 
-    Boolean deleted(Integer id);
+    Boolean deleteArticle(Integer id);
 }

@@ -32,7 +32,7 @@ public class SysUsersServiceImpl extends ServiceImpl<SysUsersMapper, SysUsers> i
             throw new ApiException("开始时间不能晚于结束时间");
         }
 
-        Page<SysUsers> page = new Page<>(sysUsersQuery.getPageNum(), sysUsersQuery.getPageSize());
+        Page<SysUsers> page = new Page<>(sysUsersQuery.getCurrent(), sysUsersQuery.getPageSize());
         LambdaQueryWrapper<SysUsers> lambdaQueryWrapper = new LambdaQueryWrapper<>();
 
         // 查询多个ID
