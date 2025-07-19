@@ -18,10 +18,10 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for demo_article
+-- Table structure for sys_articles
 -- ----------------------------
-DROP TABLE IF EXISTS `demo_article`;
-CREATE TABLE `demo_article` (
+DROP TABLE IF EXISTS `sys_articles`;
+CREATE TABLE `sys_articles` (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '文章ID',
   `title` varchar(255) DEFAULT NULL COMMENT '文章标题',
   `content` longtext COMMENT '文章内容',
@@ -36,12 +36,12 @@ CREATE TABLE `demo_article` (
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
--- Records of demo_article
+-- Records of sys_articles
 -- ----------------------------
 BEGIN;
-INSERT INTO `demo_article` (`id`, `title`, `content`, `author_id`, `category_id`, `status`, `view_count`, `created_at`, `updated_at`, `deleted_at`) VALUES (1, '文章名称1', NULL, NULL, NULL, NULL, NULL, '2025-03-22 20:05:04', '2025-03-23 10:19:23', NULL);
-INSERT INTO `demo_article` (`id`, `title`, `content`, `author_id`, `category_id`, `status`, `view_count`, `created_at`, `updated_at`, `deleted_at`) VALUES (2, '文件名称2', NULL, NULL, NULL, NULL, NULL, '2025-03-22 20:17:30', '2025-03-23 10:19:14', NULL);
-INSERT INTO `demo_article` (`id`, `title`, `content`, `author_id`, `category_id`, `status`, `view_count`, `created_at`, `updated_at`, `deleted_at`) VALUES (3, '文章名称3', NULL, NULL, NULL, NULL, NULL, '2025-03-22 20:17:32', '2025-03-23 10:19:21', NULL);
+INSERT INTO `sys_articles` (`id`, `title`, `content`, `author_id`, `category_id`, `status`, `view_count`, `created_at`, `updated_at`, `deleted_at`) VALUES (1, '文章名称1', NULL, NULL, NULL, NULL, NULL, '2025-03-22 20:05:04', '2025-03-23 10:19:23', NULL);
+INSERT INTO `sys_articles` (`id`, `title`, `content`, `author_id`, `category_id`, `status`, `view_count`, `created_at`, `updated_at`, `deleted_at`) VALUES (2, '文件名称2', NULL, NULL, NULL, NULL, NULL, '2025-03-22 20:17:30', '2025-03-23 10:19:14', NULL);
+INSERT INTO `sys_articles` (`id`, `title`, `content`, `author_id`, `category_id`, `status`, `view_count`, `created_at`, `updated_at`, `deleted_at`) VALUES (3, '文章名称3', NULL, NULL, NULL, NULL, NULL, '2025-03-22 20:17:32', '2025-03-23 10:19:21', NULL);
 COMMIT;
 
 -- ----------------------------

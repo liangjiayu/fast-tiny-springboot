@@ -1,24 +1,25 @@
 package com.me.fast.tiny.admin.service;
 
-import com.me.fast.tiny.admin.model.SysArticles;
-import com.baomidou.mybatisplus.extension.service.IService;
-
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.me.fast.tiny.admin.dto.ArticleQuery;
+import com.me.fast.tiny.admin.dto.ArticleSaveRequest;
+import com.me.fast.tiny.admin.model.SysArticles;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author system_generator
  * @since 2025-06-17
  */
 public interface ISysArticlesService extends IService<SysArticles> {
-    IPage<SysArticles> getPage();
+    IPage<SysArticles> getPage(ArticleQuery articleQuery);
 
-    int create();
+    Integer create(ArticleSaveRequest articleSaveRequest);
 
-    boolean update(int id);
+    Boolean update(Integer id, ArticleSaveRequest articleSaveRequest);
 
-    boolean delete(int id);
+    Boolean deleted(Integer id);
 }

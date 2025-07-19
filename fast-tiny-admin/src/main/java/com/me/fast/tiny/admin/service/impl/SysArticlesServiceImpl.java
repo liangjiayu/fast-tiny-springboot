@@ -1,20 +1,23 @@
 package com.me.fast.tiny.admin.service.impl;
 
-import com.me.fast.tiny.admin.model.SysArticles;
-import com.me.fast.tiny.admin.mapper.SysArticlesMapper;
-import com.me.fast.tiny.admin.service.ISysArticlesService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.me.fast.tiny.admin.dto.ArticleQuery;
+import com.me.fast.tiny.admin.dto.ArticleSaveRequest;
+import com.me.fast.tiny.admin.mapper.SysArticlesMapper;
+import com.me.fast.tiny.admin.model.SysArticles;
+import com.me.fast.tiny.admin.service.ISysArticlesService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author system_generator
@@ -27,16 +30,22 @@ public class SysArticlesServiceImpl extends ServiceImpl<SysArticlesMapper, SysAr
     SysArticlesMapper baseMapper;
 
     @Override
-    public IPage<SysArticles> getPage() {
-        Page<SysArticles> page = new Page<>(1, 10);
+    public IPage<SysArticles> getPage(ArticleQuery articleQuery) {
+        Page<SysArticles> page = new Page<>(articleQuery.getPageNum(), articleQuery.getPageSize());
         LambdaQueryWrapper<SysArticles> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+
+        // 查询文章标题
+        if (StringUtils.isNotBlank(articleQuery.getTitle())) {
+            lambdaQueryWrapper.like(SysArticles::getTitle, articleQuery.getTitle());
+        }
 
         return this.baseMapper.selectPage(page, lambdaQueryWrapper);
     }
 
     @Override
-    public int create() {
+    public Integer create(ArticleSaveRequest articleSaveRequest) {
         SysArticles record = new SysArticles();
+        BeanUtils.copyProperties(articleSaveRequest, record);
         record.setId(null);
         this.baseMapper.insert(record);
 
@@ -44,15 +53,16 @@ public class SysArticlesServiceImpl extends ServiceImpl<SysArticlesMapper, SysAr
     }
 
     @Override
-    public boolean update(int id) {
-        SysArticles record  = new SysArticles();
+    public Boolean update(Integer id, ArticleSaveRequest articleSaveRequest) {
+        SysArticles record = new SysArticles();
         record.setId(id);
+        BeanUtils.copyProperties(articleSaveRequest, record);
 
         return this.baseMapper.updateById(record) > 0;
     }
 
     @Override
-    public boolean delete(int id) {
+    public Boolean deleted(Integer id) {
         return this.baseMapper.deleteById(id) > 0;
     }
 
