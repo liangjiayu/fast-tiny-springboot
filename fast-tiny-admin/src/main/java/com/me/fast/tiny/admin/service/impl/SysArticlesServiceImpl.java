@@ -53,9 +53,8 @@ public class SysArticlesServiceImpl extends ServiceImpl<SysArticlesMapper, SysAr
     }
 
     @Override
-    public Boolean update(Integer id, ArticleSaveRequest articleSaveRequest) {
+    public Boolean update(ArticleSaveRequest articleSaveRequest) {
         SysArticles record = new SysArticles();
-        record.setId(id);
         BeanUtils.copyProperties(articleSaveRequest, record);
 
         return this.baseMapper.updateById(record) > 0;

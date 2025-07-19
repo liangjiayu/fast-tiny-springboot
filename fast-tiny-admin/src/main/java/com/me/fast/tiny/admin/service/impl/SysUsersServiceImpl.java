@@ -89,7 +89,7 @@ public class SysUsersServiceImpl extends ServiceImpl<SysUsersMapper, SysUsers> i
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean deleted(int id) {
         return this.sysUsersMapper.deleteById(id) > 0;
     }
 

@@ -19,7 +19,7 @@ public interface ISysArticlesService extends IService<SysArticles> {
 
     Integer create(ArticleSaveRequest articleSaveRequest);
 
-    Boolean update(Integer id, ArticleSaveRequest articleSaveRequest);
+    Boolean update(ArticleSaveRequest articleSaveRequest);
 
     Boolean deleted(Integer id);
 }

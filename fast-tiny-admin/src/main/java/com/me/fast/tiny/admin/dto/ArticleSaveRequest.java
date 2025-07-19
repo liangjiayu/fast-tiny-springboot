@@ -5,6 +5,9 @@ import lombok.Data;
 
 @Data
 public class ArticleSaveRequest {
+    @Schema(description = "文章id")
+    private Integer id;
+
     @Schema(description = "文章标题")
     private String title;
 

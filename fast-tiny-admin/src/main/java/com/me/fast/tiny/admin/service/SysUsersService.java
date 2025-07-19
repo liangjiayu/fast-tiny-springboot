@@ -15,7 +15,7 @@ public interface SysUsersService {
 
     boolean update(int id, SysUserUpdateDto sysUserUpdateDto);
 
-    boolean delete(int id);
+    boolean deleted(int id);
 
     SysUsers getDetails(int id);
 

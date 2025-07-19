@@ -20,7 +20,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/api/sys_users")
-@Tag(name = "SysUsersTag", description = "用户管理API")
+@Tag(name = "SysUsersController", description = "用户管理")
 public class SysUsersController {
     @Autowired
     SysUsersService sysUsersService;
@@ -28,7 +28,7 @@ public class SysUsersController {
     @GetMapping("/list")
     @ResponseBody
     @Operation(summary = "获取用户列表")
-    public CommonResult<IPage<SysUsers>> list(@Validated @ParameterObject SysUsersQuery sysUsersQuery) {
+    public CommonResult<IPage<SysUsers>> getSysUserByPage(@Validated @ParameterObject SysUsersQuery sysUsersQuery) {
         IPage<SysUsers> records = this.sysUsersService.list(sysUsersQuery);
         return CommonResult.success(records);
     }
@@ -37,7 +37,7 @@ public class SysUsersController {
     @PostMapping("/create")
     @ResponseBody
     @Operation(summary = "创建用户，返回用户id")
-    public CommonResult<Integer> create(@Validated @RequestBody SysUserCreateDto sysUserCreateDto) {
+    public CommonResult<Integer> createSysUser(@Validated @RequestBody SysUserCreateDto sysUserCreateDto) {
         int result = this.sysUsersService.create(sysUserCreateDto);
         return CommonResult.success(result);
     }
@@ -45,7 +45,7 @@ public class SysUsersController {
     @PostMapping("/update/{id}")
     @ResponseBody
     @Operation(summary = "更新用户")
-    public CommonResult<Boolean> update(
+    public CommonResult<Boolean> updateSysUser(
             @Parameter(name = "id", description = "用户id", required = true) @PathVariable("id") int id,
             @Validated @RequestBody SysUserUpdateDto sysUserUpdateDto
     ) {
@@ -56,11 +56,11 @@ public class SysUsersController {
         return CommonResult.failed("用户不存在");
     }
 
-    @PostMapping("/delete/{id}")
+    @PostMapping("/deleted/{id}")
     @ResponseBody
     @Operation(summary = "删除用户")
-    public CommonResult<Boolean> delete(@Parameter(name = "id", description = "用户id", required = true) @PathVariable int id) {
-        boolean result = this.sysUsersService.delete(id);
+    public CommonResult<Boolean> deletedSysUser(@Parameter(name = "id", description = "用户id", required = true) @PathVariable int id) {
+        boolean result = this.sysUsersService.deleted(id);
         if (result) {
             return CommonResult.success(true);
         }
@@ -70,17 +70,8 @@ public class SysUsersController {
     @GetMapping("/{id}")
     @ResponseBody
     @Operation(summary = "用户详情")
-    public CommonResult<SysUsers> details(@Parameter(name = "id", description = "用户id", required = true) @PathVariable int id) {
+    public CommonResult<SysUsers> getUserDetail(@Parameter(name = "id", description = "用户id", required = true) @PathVariable int id) {
         SysUsers result = this.sysUsersService.getDetails(id);
-        return CommonResult.success(result);
-    }
-
-    @GetMapping("/getListByPhone")
-    @ResponseBody
-    @Operation(summary = "获取列表根据手机号码")
-    public CommonResult<List<SysUsers>> getListByPhone(
-            @Parameter(name = "phoneNumber", description = "手机号码", required = true) long phoneNumber) {
-        List<SysUsers> result = this.sysUsersService.getListByPhone(phoneNumber);
         return CommonResult.success(result);
     }
 }
