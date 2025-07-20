@@ -11,17 +11,17 @@
  Target Server Version : 80032 (8.0.32)
  File Encoding         : 65001
 
- Date: 24/03/2025 22:12:54
+ Date: 20/07/2025 15:27:39
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for sys_articles
+-- Table structure for sys_article
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_articles`;
-CREATE TABLE `sys_articles` (
+DROP TABLE IF EXISTS `sys_article`;
+CREATE TABLE `sys_article` (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '文章ID',
   `title` varchar(255) DEFAULT NULL COMMENT '文章标题',
   `content` longtext COMMENT '文章内容',
@@ -33,15 +33,37 @@ CREATE TABLE `sys_articles` (
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `deleted_at` datetime DEFAULT NULL COMMENT '逻辑删除时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
--- Records of sys_articles
+-- Records of sys_article
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_articles` (`id`, `title`, `content`, `author_id`, `category_id`, `status`, `view_count`, `created_at`, `updated_at`, `deleted_at`) VALUES (1, '文章名称1', NULL, NULL, NULL, NULL, NULL, '2025-03-22 20:05:04', '2025-03-23 10:19:23', NULL);
-INSERT INTO `sys_articles` (`id`, `title`, `content`, `author_id`, `category_id`, `status`, `view_count`, `created_at`, `updated_at`, `deleted_at`) VALUES (2, '文件名称2', NULL, NULL, NULL, NULL, NULL, '2025-03-22 20:17:30', '2025-03-23 10:19:14', NULL);
-INSERT INTO `sys_articles` (`id`, `title`, `content`, `author_id`, `category_id`, `status`, `view_count`, `created_at`, `updated_at`, `deleted_at`) VALUES (3, '文章名称3', NULL, NULL, NULL, NULL, NULL, '2025-03-22 20:17:32', '2025-03-23 10:19:21', NULL);
+INSERT INTO `sys_article` (`id`, `title`, `content`, `author_id`, `category_id`, `status`, `view_count`, `created_at`, `updated_at`, `deleted_at`) VALUES (1, '文章名称1', NULL, NULL, NULL, NULL, NULL, '2025-03-22 20:05:04', '2025-03-23 10:19:23', NULL);
+INSERT INTO `sys_article` (`id`, `title`, `content`, `author_id`, `category_id`, `status`, `view_count`, `created_at`, `updated_at`, `deleted_at`) VALUES (2, '文件名称2', NULL, NULL, NULL, NULL, NULL, '2025-03-22 20:17:30', '2025-03-23 10:19:14', NULL);
+INSERT INTO `sys_article` (`id`, `title`, `content`, `author_id`, `category_id`, `status`, `view_count`, `created_at`, `updated_at`, `deleted_at`) VALUES (3, '文章名称3', NULL, NULL, NULL, NULL, NULL, '2025-03-22 20:17:32', '2025-03-23 10:19:21', NULL);
+COMMIT;
+
+-- ----------------------------
+-- Table structure for sys_product
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_product`;
+CREATE TABLE `sys_product` (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '商品ID',
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '商品名称',
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '商品描述',
+  `price` decimal(10,2) DEFAULT NULL COMMENT '商品价格',
+  `status` tinyint DEFAULT '1' COMMENT '商品状态  1:可用 0:不可用',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `deleted_at` datetime DEFAULT NULL COMMENT '逻辑删除时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of sys_product
+-- ----------------------------
+BEGIN;
 COMMIT;
 
 -- ----------------------------

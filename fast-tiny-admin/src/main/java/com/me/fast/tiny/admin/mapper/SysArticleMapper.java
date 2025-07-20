@@ -1,6 +1,6 @@
 package com.me.fast.tiny.admin.mapper;
 
-import com.me.fast.tiny.admin.model.SysArticles;
+import com.me.fast.tiny.admin.model.SysArticle;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 
@@ -10,9 +10,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author system_generator
- * @since 2025-06-17
+ * @since 2025-07-20
  */
-public interface SysArticlesMapper extends BaseMapper<SysArticles> {
+public interface SysArticleMapper extends BaseMapper<SysArticle> {
 
 }
 

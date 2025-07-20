@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class ArticleQuery extends BasePages {
+public class SysArticleQuery extends BasePages {
     @Schema(description = "文章标题")
     private String title;
 }

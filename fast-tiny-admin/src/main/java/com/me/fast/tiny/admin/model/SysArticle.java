@@ -15,14 +15,14 @@ import lombok.ToString;
  * </p>
  *
  * @author system_generator
- * @since 2025-06-17
+ * @since 2025-07-20
  */
 @Getter
 @Setter
 @ToString
-@TableName("sys_articles")
-@Schema(name = "SysArticles", description = "")
-public class SysArticles implements Serializable {
+@TableName("sys_article")
+@Schema(name = "SysArticle", description = "")
+public class SysArticle implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

@@ -1,10 +1,10 @@
 package com.me.fast.tiny.admin.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.me.fast.tiny.admin.dto.ArticleQuery;
-import com.me.fast.tiny.admin.dto.ArticleSaveRequest;
-import com.me.fast.tiny.admin.model.SysArticles;
-import com.me.fast.tiny.admin.service.ISysArticlesService;
+import com.me.fast.tiny.admin.dto.SysArticleQuery;
+import com.me.fast.tiny.admin.dto.SysArticleSaveRequest;
+import com.me.fast.tiny.admin.model.SysArticle;
+import com.me.fast.tiny.admin.service.ISysArticleService;
 import com.me.fast.tiny.common.api.CommonResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -16,26 +16,22 @@ import org.springframework.web.bind.annotation.*;
 
 
 /**
- * <p>
- * 前端控制器
- * </p>
- *
  * @author system_generator
- * @since 2025-06-17
+ * @since 2025-07-20
  */
 
 @Controller
-@RequestMapping("/api/sysArticles")
-@Tag(name = "SysArticlesController", description = "文章管理")
-public class SysArticlesController {
+@RequestMapping("/api/sysArticle")
+@Tag(name = "SysArticleController")
+public class SysArticleController {
     @Autowired
-    ISysArticlesService baseService;
+    ISysArticleService baseService;
 
     @GetMapping("/pageList")
     @ResponseBody
     @Operation(summary = "获取文章列表")
-    public CommonResult<IPage<SysArticles>> getArticleByPage(@ParameterObject ArticleQuery articleQuery) {
-        IPage<SysArticles> records = this.baseService.getListByPage(articleQuery);
+    public CommonResult<IPage<SysArticle>> getSysArticleByPage(@ParameterObject SysArticleQuery sysArticleQuery) {
+        IPage<SysArticle> records = this.baseService.getListByPage(sysArticleQuery);
         return CommonResult.success(records);
     }
 
@@ -43,27 +39,27 @@ public class SysArticlesController {
     @PostMapping("/create")
     @ResponseBody
     @Operation(summary = "创建文章数据")
-    public CommonResult<Integer> createArticle(@RequestBody ArticleSaveRequest articleSaveRequest) {
-        Integer result = this.baseService.createArticle(articleSaveRequest);
+    public CommonResult<Integer> createSysArticle(@RequestBody SysArticleSaveRequest sysArticleSaveRequest) {
+        Integer result = this.baseService.createSysArticle(sysArticleSaveRequest);
         return CommonResult.success(result);
     }
 
     @PostMapping("/update")
     @ResponseBody
     @Operation(summary = "更新文章数据")
-    public CommonResult<Boolean> updateArticle(@RequestBody ArticleSaveRequest articleSaveRequest) {
-        Boolean result = this.baseService.updateArticle(articleSaveRequest);
+    public CommonResult<Boolean> updateSysArticle(@RequestBody SysArticleSaveRequest sysArticleSaveRequest) {
+        Boolean result = this.baseService.updateSysArticle(sysArticleSaveRequest);
         if (result) {
             return CommonResult.success(true);
         }
         return CommonResult.failed("数据不存在");
     }
 
-    @PostMapping("/deleted")
+    @PostMapping("/delete")
     @ResponseBody
     @Operation(summary = "删除文章数据")
-    public CommonResult<Boolean> deleteArticle(@Parameter() Integer id) {
-        Boolean result = this.baseService.deleteArticle(id);
+    public CommonResult<Boolean> deleteSysArticle(@Parameter() Integer id) {
+        Boolean result = this.baseService.deleteSysArticle(id);
         if (result) {
             return CommonResult.success(true);
         }

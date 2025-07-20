@@ -4,8 +4,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-public class ArticleSaveRequest {
-    @Schema(description = "文章id")
+public class SysArticleSaveRequest {
+
+    @Schema(description = "文章ID")
     private Integer id;
 
     @Schema(description = "文章标题")
@@ -21,7 +22,7 @@ public class ArticleSaveRequest {
     private Integer categoryId;
 
     @Schema(description = "文章状态")
-    private String status;
+    private Byte status;
 
     @Schema(description = "阅读量")
     private Integer viewCount;
