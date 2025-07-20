@@ -6,19 +6,15 @@ import ${superServiceClassPackage};
 import com.baomidou.mybatisplus.core.metadata.IPage;
 
 /**
- * <p>
- * ${table.comment!} 服务类
- * </p>
- *
  * @author ${author}
  * @since ${date}
  */
 public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
-    IPage<${entity}> getPage();
+    IPage<${entity}> getListByPage();
 
-    int create();
+    Integer create${entity}();
 
-    boolean update(int id);
+    Boolean update${entity}();
 
-    boolean delete(int id);
+    Boolean delete${entity}(Integer id);
 }

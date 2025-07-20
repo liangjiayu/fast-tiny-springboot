@@ -13,10 +13,6 @@ import org.springframework.stereotype.Service;
 
 
 /**
- * <p>
- * ${table.comment!} 服务实现类
- * </p>
- *
  * @author ${author}
  * @since ${date}
  */
@@ -27,7 +23,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     ${table.mapperName} baseMapper;
 
     @Override
-    public IPage<${entity}> getPage() {
+    public IPage<${entity}> getListByPage() {
         Page<${entity}> page = new Page<>(1, 10);
         LambdaQueryWrapper<${entity}> lambdaQueryWrapper = new LambdaQueryWrapper<>();
 
@@ -35,7 +31,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     }
 
     @Override
-    public int create() {
+    public Integer create${entity}() {
         ${entity} record = new ${entity}();
         record.setId(null);
         this.baseMapper.insert(record);
@@ -44,15 +40,14 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     }
 
     @Override
-    public boolean update(int id) {
+    public Boolean update${entity}() {
         ${entity} record  = new ${entity}();
-        record.setId(id);
 
         return this.baseMapper.updateById(record) > 0;
     }
 
     @Override
-    public boolean delete(int id) {
+    public Boolean delete${entity}(Integer id) {
         return this.baseMapper.deleteById(id) > 0;
     }
 

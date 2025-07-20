@@ -6,31 +6,30 @@ import ${package.Service}.${table.serviceName};
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.me.fast.tiny.common.api.CommonResult;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
 
 /**
- * <p>
- * ${table.comment!} 前端控制器
- * </p>
- *
  * @author ${author}
  * @since ${date}
  */
 
 @Controller
-@RequestMapping("/${table.entityPath}")
+@RequestMapping("/api/${table.entityPath}")
+@Tag(name = "${table.controllerName}")
 public class ${table.controllerName} {
     @Autowired
     ${table.serviceName} baseService;
 
-    @GetMapping("/list")
+    @GetMapping("/pageList")
     @ResponseBody
     @Operation(summary = "获取列表")
-    public CommonResult<IPage<${entity}>> list() {
-        IPage<${entity}> records = this.baseService.getPage();
+    public CommonResult<IPage<${entity}>> get${entity}ByPage() {
+        IPage<${entity}> records = this.baseService.getListByPage();
         return CommonResult.success(records);
     }
 
@@ -38,27 +37,27 @@ public class ${table.controllerName} {
     @PostMapping("/create")
     @ResponseBody
     @Operation(summary = "创建数据")
-    public CommonResult<Integer> create() {
-        int result = this.baseService.create();
+    public CommonResult<Integer> create${entity}(@RequestBody ${entity}SaveRequest xxxxxx) {
+        Integer result = this.baseService.create${entity}();
         return CommonResult.success(result);
     }
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/update")
     @ResponseBody
     @Operation(summary = "更新数据")
-    public CommonResult<Boolean> update(@PathVariable("id") int id) {
-        boolean result = this.baseService.update(id);
+    public CommonResult<Boolean> update${entity}(@RequestBody ${entity}SaveRequest xxxxxx) {
+        Boolean result = this.baseService.update${entity}();
         if (result) {
             return CommonResult.success(true);
         }
         return CommonResult.failed("数据不存在");
     }
 
-    @PostMapping("/delete/{id}")
+    @PostMapping("/delete")
     @ResponseBody
     @Operation(summary = "删除数据")
-    public CommonResult<Boolean> delete(@PathVariable int id) {
-        boolean result = this.baseService.delete(id);
+    public CommonResult<Boolean> delete${entity}(@Parameter() Integer id) {
+        Boolean result = this.baseService.delete${entity}(id);
         if (result) {
             return CommonResult.success(true);
         }
