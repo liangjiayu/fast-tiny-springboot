@@ -34,7 +34,12 @@ public class SysArticleServiceImpl extends ServiceImpl<SysArticleMapper, SysArti
         if (StringUtils.isNotBlank(sysArticleQuery.getTitle())) {
             lambdaQueryWrapper.like(SysArticle::getTitle, sysArticleQuery.getTitle());
         }
+        // 状态筛选（如果状态不为空）
+        if (sysArticleQuery.getStatus() != null) {
+            lambdaQueryWrapper.eq(SysArticle::getStatus, sysArticleQuery.getStatus());
+        }
 
+        lambdaQueryWrapper.orderByDesc(SysArticle::getCreatedAt);
         return this.baseMapper.selectPage(page, lambdaQueryWrapper);
     }
 

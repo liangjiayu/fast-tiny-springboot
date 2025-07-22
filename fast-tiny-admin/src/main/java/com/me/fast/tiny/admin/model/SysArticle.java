@@ -43,7 +43,7 @@ public class SysArticle implements Serializable {
     private Integer categoryId;
 
     @Schema(description = "文章状态")
-    private Byte status;
+    private Integer status;
 
     @Schema(description = "阅读量")
     private Integer viewCount;

@@ -10,4 +10,7 @@ import lombok.EqualsAndHashCode;
 public class SysArticleQuery extends BasePages {
     @Schema(description = "文章标题")
     private String title;
+
+    @Schema(description = "文章状态")
+    private Integer status;
 }
